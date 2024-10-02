@@ -70,6 +70,9 @@ class InsertExecutor : public AbstractExecutor {
 
   // Whether `Next` has been called.
   [[maybe_unused]] bool emitted_{false};
+
+  // Result Schema
+  std::unique_ptr<Schema> result_sc_;
 };
 
 }  // namespace bustub
