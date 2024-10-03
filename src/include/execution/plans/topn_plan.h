@@ -57,7 +57,6 @@ class TopNPlanNode : public AbstractPlanNode {
   }
 
   BUSTUB_PLAN_NODE_CLONE_WITH_CHILDREN(TopNPlanNode);
-
   std::vector<std::pair<OrderByType, AbstractExpressionRef>> order_bys_;
   std::size_t n_;
 

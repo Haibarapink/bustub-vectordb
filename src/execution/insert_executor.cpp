@@ -41,7 +41,6 @@ auto InsertExecutor::Next([[maybe_unused]] Tuple *tuple, RID *rid) -> bool {
   if (emitted_) {
     return false;
   }
- // std::cout << "aaa" << std::endl;
   emitted_ = true;
   Tuple t;
   RID r;

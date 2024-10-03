@@ -15,6 +15,7 @@
 #include <memory>
 #include <utility>
 #include <vector>
+#include <any>
 
 #include "execution/executor_context.h"
 #include "execution/executors/abstract_executor.h"
@@ -23,6 +24,8 @@
 #include "storage/table/tuple.h"
 
 namespace bustub {
+
+
 
 /**
  * The TopNExecutor executor executes a topn.
@@ -59,6 +62,10 @@ class TopNExecutor : public AbstractExecutor {
   auto GetNumInHeap() -> size_t;
 
  private:
+  using DataPair = std::pair<Tuple, RID>;
+
+  std::any pq_;
+
   /** The TopN plan node to be executed */
   const TopNPlanNode *plan_;
   /** The child executor from which tuples are obtained */
