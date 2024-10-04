@@ -25,8 +25,6 @@
 
 namespace bustub {
 
-
-
 /**
  * The TopNExecutor executor executes a topn.
  */
@@ -38,7 +36,6 @@ class TopNExecutor : public AbstractExecutor {
    * @param plan The TopN plan to be executed
    */
   TopNExecutor(ExecutorContext *exec_ctx, const TopNPlanNode *plan, std::unique_ptr<AbstractExecutor> &&child_executor);
-
   /** Initialize the TopN */
   void Init() override;
 
@@ -63,8 +60,13 @@ class TopNExecutor : public AbstractExecutor {
 
  private:
   using DataPair = std::pair<Tuple, RID>;
-
+  std::function<bool(DataPair&, DataPair&)> cmp_function_;
+  using pq_type =  std::priority_queue<DataPair , std::vector<DataPair >, decltype(cmp_function_)>;
   std::any pq_;
+
+  auto&& get_pq() {
+    return std::any_cast<pq_type&>(pq_);
+  }
 
   /** The TopN plan node to be executed */
   const TopNPlanNode *plan_;
