@@ -63,6 +63,8 @@ class TopNExecutor : public AbstractExecutor {
   std::function<bool(DataPair&, DataPair&)> cmp_function_;
   using pq_type =  std::priority_queue<DataPair , std::vector<DataPair >, decltype(cmp_function_)>;
   std::any pq_;
+  std::unique_ptr<Schema> schema_;
+  std::vector<DataPair > results_;
 
   auto&& get_pq() {
     return std::any_cast<pq_type&>(pq_);
